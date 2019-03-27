@@ -5,25 +5,27 @@ class DishDetail extends Component {
 
     renderDish(dish) {
         return(
-            <Card>
-                <CardImg width="100%" src={dish.image} alt={dish.name} />
-                <CardBody>
-                    <CardTitle heading>{dish.name}</CardTitle>
-                    <CardText>{dish.description}</CardText> 
-                </CardBody>
-            </Card>
+            <div className="col-12 col-md-5 m-1">
+                <Card>
+                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardBody>
+                        <CardTitle heading>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText> 
+                    </CardBody>
+                </Card>
+            </div>
         );
     };
     renderComments(comments) {
         if (comments != null) {
             return (
-                <div className="container">
+                <div className="col-12 col-md-5 m-1">
                     <h4>Comments</h4>
                     {comments.map((comment) => {
                         return(
                             <ul className="list-unstyled" key={comment.id}>
-                                <li key="comment">{comment.comment}</li>
-                                <li key="author">-- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric',month: 'long',day: '2-digit'}).format(new Date(comment.date))}</li>
+                                <p>{comment.comment}</p>
+                                <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric',month: 'long',day: '2-digit'}).format(new Date(comment.date))}</p>
                             </ul>
                         )
                     })}
@@ -39,11 +41,11 @@ class DishDetail extends Component {
         
         if (dish != null) {
             return(
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
+                <div className="container">
+                    <div className="row">
                         {this.renderDish(dish)}
+                        {this.renderComments(dish.comments)}
                     </div>
-                    {this.renderComments(dish.comments)}
                 </div>
             )
         } else {
