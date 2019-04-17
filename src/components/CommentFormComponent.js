@@ -24,9 +24,7 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values));
-        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -56,8 +54,8 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group" md={10}>
                                 <Col>
-                                    <Label htmlFor="yourname">Your Name</Label>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Label htmlFor="author">Your Name</Label>
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -78,8 +76,8 @@ class CommentForm extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col>
-                                    <Label htmlFor="message">Comment</Label>
-                                    <Control.textarea model=".message" id="message" name="message" rows="12"
+                                    <Label htmlFor="comment">Comment</Label>
+                                    <Control.textarea model=".comment" id="comment" name="comment" rows="12"
                                         className="form-control" />
                                 </Col>
                             </Row>
