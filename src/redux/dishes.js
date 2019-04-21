@@ -1,5 +1,8 @@
 import * as ActionTypes from './ActionTypes';
 
+/**
+ * This is the Dishes reducer
+ * */
 export const Dishes = (state = {
     isLoading: true,
     errMess: null,
