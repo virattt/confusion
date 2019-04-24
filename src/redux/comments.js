@@ -18,7 +18,7 @@ export const Comments = (state = {
             }
         case ActionTypes.ADD_COMMENT:
             var comment = action.payload;
-            return {...state, comments: state.comments.concat(comment)};
+            return { ...state, comments: state.comments.concat(comment) };
         default:
             return state;
     }

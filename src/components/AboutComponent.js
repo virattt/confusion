@@ -1,12 +1,18 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrls';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function About(props) {
-
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader} />
+            <RenderLeader
+                leader={leader}
+                isLoading={props.isLoading}
+                errMess={props.errMess}
+            />
         );
     });
 
@@ -74,22 +80,41 @@ function About(props) {
     );
 }
 
-function RenderLeader(props) {
-    const leader = props.leader
-    return (
-        <div className="container">
-            <div className="row col-12 mt-3">
-                <Media left>
-                    <Media object src={leader.image} alt={leader.name} />
-                </Media>
-                <Media body className="ml-5">
-                    <Media heading>{leader.name}</Media>
-                    <p>{leader.designation}</p>
-                    <p>{leader.description}</p>
-                </Media>
+function RenderLeader({ leader, isLoading, errMess }) {
+    if (isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    else if (errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else {
+        return (
+                <div className="container">
+                    <div className="row col-12 mt-3">
+                            <Media left>
+                                <Media object src={baseUrl + leader.image} alt={leader.name} />
+                            </Media>
+                            <Media body className="ml-5">
+                                <Media heading>{leader.name}</Media>
+                                <p>{leader.designation}</p>
+                                <p>{leader.description}</p>
+                            </Media>
+                    </div>
+                </div>
+        );
+    }
 }
 
 export default About;
